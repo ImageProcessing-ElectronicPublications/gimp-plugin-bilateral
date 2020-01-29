@@ -1,0 +1,40 @@
+Simple* bilateral filter
+========================
+
+Copyright (C) 2010 David Beynon <dave@spectral3d.co.uk.org>
+
+Based on gimp plugin framework (C) 2000-2003  Michael Natterer <mitch@gimp.org>
+
+This package implements a fast "surface blur" effect based on a simplified
+bilateral filter.  Results are similar to those of "Selective Gaussian Blur",
+but performance should be substantially better for large filter sizes.
+
+The main features are as follows:
+
+- O(1) filtering algorithm makes performance almost independent of filter 
+  radius.
+
+To build and install it, just ...
+
+	./configure
+	make
+	make install
+
+Technical stuff:
+
+The O(1) filtering algorithm is based on a structure called the "integral 
+histogram".  This allows extremely rapid extraction of histograms for 
+rectangular regions of an image, at the cost of absurd amounts of memory.  In
+order to keep the memory usage under control the filter works on the image in
+tiles, and at a reduced precision.  These are currently set to give an overhead
+of 64mb.
+
+Image quality may be improved by increasing the number of bins in use, and
+performance by increasing the size of tiles.  These may be adjusted by editing
+"settings.h".
+
+Quality and performance controls may be added to future versions.
+
+The word "simple" refers to the mathematical characteristics of the spatial 
+filter kernel.  Hopefully the code is fairly simple to read, but bits of it
+were quite fiddly :)
