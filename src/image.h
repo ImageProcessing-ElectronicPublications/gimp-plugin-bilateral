@@ -145,7 +145,7 @@ private:
 
             while(uint32_t(x) > extent)
             {
-                x = abs((2 * extent) - x);
+                x = abs((int)(2 * extent) - (int)x);
             }
         }
         return x;
